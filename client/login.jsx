@@ -33,6 +33,33 @@ const handleLogin = (e) => {
 
     helper.sendPost(e.target.action, {username, pass});
     return false; 
+};
+
+const handleSignup = (e, onUserAdded) => {
+    e.preventDefault();
+    
+    const username = e.target.querySelector('#user').value;
+    const pass = e.target.querySelector('#pass').value;
+    const pass2 = e.target.querySelector('#pass2').value;
+
+    if(!username || !pass) {
+        helper.handleError('Your USERNAME or PASSWORD is empty! Please fill both in to signup!');
+        return false;
+    }
+    
+    if(!pass2) {
+        helper.handleError('Please reenter your PASSWORD for verification purposes!');
+        return false;
+    } 
+
+    if(pass !== pass2) {
+        helper.handleError('The PASSWORD did not verify! Please reenter both again!');
+        return false;
+    }
+
+    helper.sendPost(e.target.action, {username, pass, pass2}, onUserAdded);
+
+    return false;
 }
 
 const LoginWindow = () => {
@@ -47,12 +74,43 @@ const LoginWindow = () => {
     );
 };
 
+const SignupWindow = (props) => {
+    return (
+        <form id="signupForm" name="signupForm" onSubmit={(e) => handleSignup(e, props.triggerReload)} action="/signup" method="POST" className="mainForm">
+            <label htmlFor="username">USERNAME: </label>
+            <input id="user" type="text" name="username" placeholder="username" />
+            <label htmlFor="pass">PASSWORD: </label>
+            <input id="pass" type="password" name="pass" placeholder="password" />
+            <label htmlFor="pass">REENTER PASSWORD: </label>
+            <input id="pass2" type="password" name="pass2" placeholder="reenter password" />
+            <input className="formSubmit" type="submit" value="Sign up" />
+        </form>
+    );
+};
+
 const init = () => {
+    const loginButton = document.getElementById('loginButton');
+    const signupButton = document.getElementById('signupButton');
+
     const root = createRoot(document.getElementById('content'));
     const rootAd = createRoot(document.getElementById('ad'));
 
+    loginButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.render( <LoginWindow /> );
+        rootAd.render ( <PlaceholderAd/> );
+        return false;
+    });
+
+    signupButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.render( <SignupWindow/> );
+        rootAd.render (<PlaceholderAd/> );
+        return false;
+    })
+
     root.render( <LoginWindow /> );
     rootAd.render( <PlaceholderAd /> );
-}
+};
 
 window.onload = init;

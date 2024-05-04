@@ -64,8 +64,12 @@ h3 {
 }
 
 label, input[type=submit] {
+    width: 50%;
+    margin: 0 auto;
     font-size: larger;
     display: block;
+    background-color: 00FFFF;
+    border-radius: 5px;
 }
 
 
