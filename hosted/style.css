@@ -45,6 +45,39 @@ h1, h2, h3 {
     font-weight: bold;
 }
 
+h3 {
+    background-color: #f9c596;
+}
+
 #content {
     text-align: center;
+}
+
+#adimg {
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 80%;
+}
+
+label, input[type=submit] {
+    font-size: larger;
+    display: block;
+}
+
+
+input[type=text], input[type=password] {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+input[type=submit] {
+    width: 80px;
+    margin: 0 auto;
 }
