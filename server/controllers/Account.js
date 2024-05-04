@@ -1,4 +1,3 @@
-const { rest } = require('underscore');
 const models = require('../models');
 
 const { Account } = models;
@@ -66,7 +65,7 @@ const change = async (req, res) => {
     return res.status(400).json({ error: 'All fields are required!' });
   }
 
-  if (pass == pass2) {
+  if (pass === pass2) {
     return res.status(400).json({ error: 'Passwords need to be different!' });
   }
 
@@ -76,23 +75,17 @@ const change = async (req, res) => {
     if (err || !account) {
       return res.status(401).json({ error: 'Wrong username or password!' });
     }
-    try {
-      const updatePromise = Account.findOneAndUpdate({ username: req.body.username }, {password: hash}, {
-        returnDocument: 'after',
-        sort: {createdDate: 'descending' },
-      }).lean().exec();
-      updatePromise.then((doc) => res.json({
-        username: doc.username,
-        password: doc.password,
-      }));
-      updatePromise.catch((err) => {
-        console.log(err);
-        return res.status(500).json({ error: 'Something went wrong!' });
-      });
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json({ error: 'An error occured!' });
-    }
+    const updatePromise = Account.findOneAndUpdate(
+      { username: req.body.username },
+      { password: hash },
+      { returnDocument: 'after', sort: { createdDate: 'descending' } },
+    ).lean().exec();
+    updatePromise.catch((err2) => {
+      console.log(err2);
+      return res.status(500).json({ error: 'Something went wrong!' });
+    });
+    req.session.account = Account.toAPI(updatePromise);
+    return res.json({ redirect: '/maker' });
   });
 };
 
