@@ -46,12 +46,10 @@ const handleSignup = (e, onUserAdded) => {
         helper.handleError('Your USERNAME or PASSWORD is empty! Please fill both in to signup!');
         return false;
     }
-    
     if(!pass2) {
         helper.handleError('Please reenter your PASSWORD for verification purposes!');
         return false;
     } 
-
     if(pass !== pass2) {
         helper.handleError('The PASSWORD did not verify! Please reenter both again!');
         return false;
@@ -60,7 +58,37 @@ const handleSignup = (e, onUserAdded) => {
     helper.sendPost(e.target.action, {username, pass, pass2}, onUserAdded);
 
     return false;
-}
+};
+
+
+const handleChange = (e, onPassUpdate) => {
+    e.preventDefault();
+
+    const username = e.target.querySelector('#user').value;
+    const pass = e.target.querySelector('#pass').value;
+    const pass2 = e.target.querySelector('#pass2').value;
+
+    if(!username) {
+        helper.handleError('Please enter your USERNAME!');
+        return false;
+    }
+    if(!pass) {
+        helper.handleError('Please enter your CURRENT PASSWORD!');
+        return false;
+    }
+    if(!pass2) {
+        helper.handleError('Please enter your NEW PASSWORD!');
+        return false;
+    }
+    if(pass == pass2) {
+        helper.handleError('Please put in a different NEW PASSWORD different!');
+        return false;
+    }
+
+    helper.sendPost(e.target.action, {username, pass, pass2}, onPassUpdate);
+
+    return false;
+};
 
 const LoginWindow = () => {
     return (
@@ -69,7 +97,7 @@ const LoginWindow = () => {
             <input id="user" type="text" name="username" placeholder="username" />
             <label htmlFor="pass">PASSWORD: </label>
             <input id="pass" type="password" name="pass" placeholder="password" />
-            <input className="formSubmit" type="submit" value="Log in" />
+            <input className="formSubmit" type="submit" value="LOGIN" />
         </form>
     );
 };
@@ -83,14 +111,29 @@ const SignupWindow = (props) => {
             <input id="pass" type="password" name="pass" placeholder="password" />
             <label htmlFor="pass">REENTER PASSWORD: </label>
             <input id="pass2" type="password" name="pass2" placeholder="reenter password" />
-            <input className="formSubmit" type="submit" value="Sign up" />
+            <input className="formSubmit" type="submit" value="SIGN UP" />
         </form>
     );
 };
 
+const ChangeWindow = (props) => {
+    return (
+        <form id="changeForm" name="changeForm" onSubmit={(e) => handleChange(e, props.triggerReload)} action="/change" method="POST" className="mainForm">
+            <label htmlFor="username">USERNAME: </label>
+            <input id="user" type="text" name="username" placeholder="username" />
+            <label htmlFor="pass">CURRENT PASSWORD: </label>
+            <input id="pass" type="password" name="pass" placeholder="current password" />
+            <label htmlFor="pass">NEW PASSWORD: </label>
+            <input id="pass2" type="password" name="pass2" placeholder="new password" />
+            <input className="formSubmit" type="submit" value="CHANGE PASSWORD" />
+        </form>
+    )
+}
+
 const init = () => {
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');
+    const changeButton = document.getElementById('changeButton');
 
     const root = createRoot(document.getElementById('content'));
     const rootAd = createRoot(document.getElementById('ad'));
@@ -105,9 +148,16 @@ const init = () => {
     signupButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <SignupWindow/> );
-        rootAd.render (<PlaceholderAd/> );
+        rootAd.render ( <PlaceholderAd/> );
         return false;
-    })
+    });
+
+    changeButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.render( <ChangeWindow /> );
+        rootAd.render ( <PlaceholderAd/> );
+        return false;
+    });
 
     root.render( <LoginWindow /> );
     rootAd.render( <PlaceholderAd /> );

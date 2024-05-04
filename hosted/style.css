@@ -70,6 +70,7 @@ label, input[type=submit] {
     display: block;
     background-color: 00FFFF;
     border-radius: 5px;
+    border: 2px solid black;
 }
 
 
@@ -82,6 +83,7 @@ input[type=text], input[type=password] {
 }
 
 input[type=submit] {
-    width: 80px;
+    background-color: chartreuse;
+    width: 250px;
     margin: 0 auto;
 }
