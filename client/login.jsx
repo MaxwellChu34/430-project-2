@@ -3,6 +3,22 @@ const React = require('react');
 const { useState, useEffect } = React;
 const {createRoot} = require('react-dom/client');
 
+const handleLogin = (e) => {
+    e.preventDefault();
+    helper.hideError();
+
+    const username = e.target.querySelector('#user').value;
+    const pass = e.target.querySelector('#pass').value;
+
+    if(!username || !pass) {
+        helper.handleError('Username or password is empty!');
+        return false;
+    }
+
+    helper.sendPost(e.target.action, {username, pass});
+    return false; 
+}
+
 const LoginWindow = () => {
     return (
         <form id="loginForm" name="loginForm" onSubmit={handleLogin} action="/login" method="POST" className="mainForm">
@@ -16,6 +32,8 @@ const LoginWindow = () => {
 };
 
 const init = () => {
+    const root = createRoot(document.getElementById('content'));
+
     root.render( <LoginWindow /> );
 }
 
