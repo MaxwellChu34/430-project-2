@@ -6,47 +6,57 @@ const QuizSchema = new mongoose.Schema({
   qAnswer1: {
     type: String,
     required: true,
+    default: '',
   },
   qAnswer2: {
     type: String,
     required: true,
+    default: '',
   },
   qAnswer3: {
     type: String,
     required: true,
+    default: '',
   },
   qAnswer4: {
     type: String,
     required: true,
+    default: '',
   },
   qAnswer5: {
     type: String,
     required: true,
+    default: '',
   },
   qDeterminant1: {
     type: Number,
     min: 0,
     required: true,
+    default: 0,
   },
   qDeterminant2: {
     type: Number,
     min: 0,
     required: true,
+    default: 0,
   },
   qDeterminant3: {
     type: Number,
     min: 0,
     required: true,
+    default: 0,
   },
   qDeterminant4: {
     type: Number,
     min: 0,
     required: true,
+    default: 0,
   },
   qDeterminant5: {
     type: Number,
     min: 0,
     required: true,
+    default: 0,
   },
   owner: {
     type: mongoose.Schema.ObjectId,
