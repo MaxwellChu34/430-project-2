@@ -10,6 +10,7 @@ const router = (app) => {
   app.post('/admin', mid.requiresSecure, mid.requiresLogout, controllers.Account.admin);
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
+  app.get('/quiz', mid.requiresLogin, controllers.Quiz.makeQuiz);
 
   app.get('/adminPage', controllers.Admin.adminPage);
   app.get('/users', controllers.Admin.users);
