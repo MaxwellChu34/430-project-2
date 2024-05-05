@@ -36,7 +36,15 @@ const Answer1 = (props) => {
     if(answer1.length === 0) {
         return;
     }
-}
+
+    const answerNode = answer1.map(answer => {
+        return (
+            <h3>{answer.qanswer1}</h3>
+        );
+    });
+
+    return ({answerNode});
+};
 
 const AnswerRecords1 = () => {
     const [reloadAnswers1, setReloadAnswers1] = useState(false);
@@ -63,15 +71,11 @@ const handleAnswer = (e, question) => {
         return false;
     }
 
-    let selected = document.querySelector(`input[name=q${question}]:checked`);
-    let intSelected = parseInt(selected);
-    for(let i = 0; i < 10; i++) {
-        if(radioForm[i].checked) {
-            let answer = radioForm[i].value;
-        }
-    }
-
-    helper.sendPost(e.target.action, {question, answer, intSelected});
+    let answer = document.querySelector(`input[name=q${question}]:checked`).value;
+    let answerId = document.querySelector(`input[name=q${question}]:checked`).id;
+    let answerIdNum = parseInt(answerId);
+    
+    helper.sendPost(e.target.action, {question, answer, answerIdNum});
     
     return false;
 };
@@ -245,10 +249,10 @@ const init = () => {
     const root = createRoot(document.getElementById('app'));
     const rootAd = createRoot(document.getElementById('ad'));
     const rootRecord1 = createRoot(document.getElementById('check1'));
-    const rootRecord2 = createRoot(document.getElementById('check2'));
+    /*const rootRecord2 = createRoot(document.getElementById('check2'));
     const rootRecord3 = createRoot(document.getElementById('check3'));
     const rootRecord4 = createRoot(document.getElementById('check4'));
-    const rootRecord5 = createRoot(document.getElementById('check5'));
+    const rootRecord5 = createRoot(document.getElementById('check5'));*/
 
     homeButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -296,10 +300,11 @@ const init = () => {
     root.render( <App /> );
     rootAd.render( <PlaceholderAd /> );
     rootRecord1.render( <AnswerRecords1 /> );
+    /*
     rootRecord2.render( <AnswerRecords2 /> );
     rootRecord3.render( <AnswerRecords3 /> );
     rootRecord4.render( <AnswerRecords4 /> );
-    rootRecord5.render( <AnswerRecords5 /> );
+    rootRecord5.render( <AnswerRecords5 /> );*/
 }
 
 window.onload = init;

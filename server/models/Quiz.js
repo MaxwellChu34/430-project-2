@@ -25,27 +25,27 @@ const QuizSchema = new mongoose.Schema({
   },
   qDeterminant1: {
     type: Number,
-    min: 1,
+    min: 0,
     required: true,
   },
   qDeterminant2: {
     type: Number,
-    min: 1,
+    min: 0,
     required: true,
   },
   qDeterminant3: {
     type: Number,
-    min: 1,
+    min: 0,
     required: true,
   },
   qDeterminant4: {
     type: Number,
-    min: 1,
+    min: 0,
     required: true,
   },
   qDeterminant5: {
     type: Number,
-    min: 1,
+    min: 0,
     required: true,
   },
   owner: {
