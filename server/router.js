@@ -12,6 +12,7 @@ const router = (app) => {
   app.post('/admin', mid.requiresSecure, mid.requiresLogout, controllers.Account.admin);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/*', controllers.NotFound.notFound);
 };
 
 module.exports = router;
