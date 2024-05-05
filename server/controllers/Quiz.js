@@ -18,7 +18,22 @@ const getQuiz = async (req, res) => {
   }
 };
 
+const q1 = (req, res) => res.json({ redirect: '/q1' });
+
+const q2 = (req, res) => res.json({ redirect: '/q2' });
+
+const q3 = (req, res) => res.json({ redirect: '/q3' });
+
+const q4 = (req, res) => res.json({ redirect: '/q4' });
+
+const q5 = (req, res) => res.json({ redirect: '/q5' });
+
 module.exports = {
   quizPage,
   getQuiz,
+  q1,
+  q2,
+  q3,
+  q4,
+  q5,
 };

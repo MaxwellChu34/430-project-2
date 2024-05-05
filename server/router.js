@@ -11,6 +11,11 @@ const router = (app) => {
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/quiz', mid.requiresLogin, controllers.Quiz.quizPage);
+  app.get('/q1', mid.requiresLogin, controllers.Quiz.q1);
+  app.get('/q2', mid.requiresLogin, controllers.Quiz.q2);
+  app.get('/q3', mid.requiresLogin, controllers.Quiz.q3);
+  app.get('/q4', mid.requiresLogin, controllers.Quiz.q4);
+  app.get('/q5', mid.requiresLogin, controllers.Quiz.q5);
 
   app.get('/adminPage', controllers.Admin.adminPage);
   app.get('/users', controllers.Admin.users);
