@@ -1,27 +1,49 @@
 const mongoose = require('mongoose');
 
+let QuizModel = {};
+
 const QuizSchema = new mongoose.Schema({
-  q1: {
+  qAnswer1: {
+    type: String,
+    required: true,
+  },
+  qAnswer2: {
+    type: String,
+    required: true,
+  },
+  qAnswer3: {
+    type: String,
+    required: true,
+  },
+  qAnswer4: {
+    type: String,
+    required: true,
+  },
+  qAnswer5: {
+    type: String,
+    required: true,
+  },
+  qDeterminant1: {
     type: Number,
     min: 1,
     required: true,
   },
-  q2: {
+  qDeterminant2: {
     type: Number,
     min: 1,
     required: true,
   },
-  q3: {
+  qDeterminant3: {
     type: Number,
     min: 1,
     required: true,
   },
-  q4: {
+  qDeterminant4: {
     type: Number,
     min: 1,
     required: true,
   },
-  q5: {
+  qDeterminant5: {
     type: Number,
     min: 1,
     required: true,
@@ -38,12 +60,17 @@ const QuizSchema = new mongoose.Schema({
 });
 
 QuizSchema.statics.toAPI = (doc) => ({
-  q1: doc.q1,
-  q2: doc.q1,
-  q3: doc.q3,
-  q4: doc.q4,
-  q5: doc.q5,
+  qAnswer1: doc.qAnswer1,
+  qAnswer2: doc.qAnswer2,
+  qAnswer3: doc.qAnswer3,
+  qAnswer4: doc.qAnswer4,
+  qAnswer5: doc.qAnswer5,
+  qDeterminant1: doc.qDeterminant1,
+  qDeterminant2: doc.qDeterminant2,
+  qDeterminant3: doc.qDeterminant3,
+  qDeterminant4: doc.qDeterminant4,
+  qDeterminant5: doc.qDeterminant5,
 });
 
-const QuizModel = mongoose.model('Quiz', QuizSchema);
+QuizModel = mongoose.model('Quiz', QuizSchema);
 module.exports = QuizModel;

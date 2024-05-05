@@ -38,20 +38,30 @@ const handleAnswer = (e, question) => {
     }
 
     let selected = document.querySelector(`input[name=q${question}]:checked`);
-    //parseInt(selected);
+    let intSelected = parseInt(selected);
     for(let i = 0; i < 10; i++) {
         if(radioForm[i].checked) {
-            console.log(radioForm[i].value);
+            let answer = radioForm[i].value;
         }
     }
+
+    helper.sendPost(e.target.action, {question, answer, intSelected})
     
     return false;
-}
+};
 
 const App = () => {
     return (
         <div>
-            <h3>Hey there! This quiz will ask you a few things to see who your favorite member would most likely be in the KPOP group TWICE. Use the navigation bar on the left side of the screen to jump around the quiz. Make sure you click submit on all questions. You can also keep track of what you answered on the right side of the screen. Have fun!</h3>
+            <h3>Hey there! This quiz will ask you a few things to 
+                see who your favorite member would most likely be 
+                in the KPOP group TWICE. Use the navigation bar 
+                on the left side of the screen to jump around the 
+                quiz. Make sure you click submit on all questions. 
+                You can also keep track of what you answered on 
+                the right side of the screen. When you're ready 
+                and answered everything, you can click the "Results" 
+                screen on the left to see who you got. Have fun!</h3>
         </div>
     )
 };
@@ -191,6 +201,12 @@ const Q5 = () => {
     )
 };
 
+const Results = () => {
+    return (
+        <button type="button">SUBMIT QUIZ!</button>
+    )
+};
+
 const init = () => {
     const homeButton = document.getElementById('homeButton');
     const q1 = document.getElementById('questionI');
@@ -198,6 +214,7 @@ const init = () => {
     const q3 = document.getElementById('questionIII');
     const q4 = document.getElementById('questionIV');
     const q5 = document.getElementById('questionV');
+    const results = document.getElementById('results');
 
     const root = createRoot(document.getElementById('app'));
     const rootAd = createRoot(document.getElementById('ad'));
@@ -238,6 +255,12 @@ const init = () => {
         root.render( <Q5 /> );
         rootAd.render( <PlaceholderAd/> );
     });
+
+    results.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.render( <Results /> );
+        rootAd.render( <PlaceholderAd/> );
+    })
 
     root.render( <App /> );
     rootAd.render( <PlaceholderAd /> );
