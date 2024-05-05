@@ -89,10 +89,30 @@ const change = async (req, res) => {
   });
 };
 
+const admin = (req, res) => {
+  const username = `${req.body.username}`;
+  const pass = `${req.body.pass}`;
+
+  if (!username || !pass) {
+    return res.status(400).json({ error: 'All fields are required!' });
+  }
+
+  if(username !== "ADMIN") {
+    return res.status(401).json({ error: 'That is the wrong admin username!' });
+  }
+
+  if(pass !== "PASSWORD") {
+    return res.status(401).json({ error: 'That is not the admin password!' });
+  }
+
+  return res.json({ redirect: '/adminPage' });
+}
+
 module.exports = {
   loginPage,
   login,
   logout,
   signup,
   change,
+  admin,
 };

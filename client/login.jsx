@@ -90,6 +90,26 @@ const handleChange = (e, onPassUpdate) => {
     return false;
 };
 
+const handleAdmin = (e) => {
+    e.preventDefault();
+
+    const username = e.target.querySelector('#user').value;
+    const pass = e.target.querySelector('#pass').value;
+
+    if(!username) {
+        helper.handleError('If you know it, please enter the ADMIN USERNAME! Normal users must login at the "Login" link!');
+        return false;
+    }
+    if(!pass) {
+        helper.handleError('If you know it, please enter the ADMIN PASSWORD! Normal users must login at the "Login" link!');
+        return false;
+    }
+
+    helper.sendPost(e.target.action, {username, pass});
+
+    return false;
+};
+
 const LoginWindow = () => {
     return (
         <form id="loginForm" name="loginForm" onSubmit={handleLogin} action="/login" method="POST" className="mainForm">
@@ -130,10 +150,23 @@ const ChangeWindow = (props) => {
     )
 }
 
+const AdminWindow = () => {
+    return (
+        <form id="adminForm" name="adminForm" onSubmit={handleAdmin} action="/admin" method="POST" className="mainForm">
+            <label htmlFor="username">ADMIN USERNAME: </label>
+            <input id="user" type="text" name="username" placeholder="username" />
+            <label htmlFor="pass">ADMIN PASSWORD: </label>
+            <input id="pass" type="password" name="pass" placeholder="password" />
+            <input className="formSubmit" type="submit" value="LOGIN" />
+        </form>
+    );
+}
+
 const init = () => {
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');
     const changeButton = document.getElementById('changeButton');
+    const adminButton = document.getElementById('adminButton');
 
     const root = createRoot(document.getElementById('content'));
     const rootAd = createRoot(document.getElementById('ad'));
@@ -141,23 +174,30 @@ const init = () => {
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <LoginWindow /> );
-        rootAd.render ( <PlaceholderAd/> );
+        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     signupButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <SignupWindow/> );
-        rootAd.render ( <PlaceholderAd/> );
+        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     changeButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <ChangeWindow /> );
-        rootAd.render ( <PlaceholderAd/> );
+        rootAd.render( <PlaceholderAd/> );
         return false;
     });
+
+    adminButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.render( <AdminWindow /> );
+        rootAd.render( <PlaceholderAd/> );
+        return false;
+    })
 
     root.render( <LoginWindow /> );
     rootAd.render( <PlaceholderAd /> );
