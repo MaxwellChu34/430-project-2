@@ -22,7 +22,7 @@ const PlaceholderAd = () => {
 
 const App = () => {
     return (
-        <div></div>
+        <p>Hey! This quiz will ask you a few things to see who your favorite member would most likely be in the KPOP group TWICE.</p>
     )
 }
 
