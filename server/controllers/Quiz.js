@@ -28,12 +28,12 @@ const updateQuiz = async (req, res) => {
   }
 };
 
-const getAnswers = async (req, res) => {
+const getAnswer1 = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
-    const docs = await Quiz.find(query).select('qAnswer1 qAnswer2 qAnswer3 qAnswer4 qAnswer5').lean().exec();
+    const docs = await Quiz.find(query).select('qAnswer1').lean().exec();
 
-    return res.json({ answer: docs });
+    return res.json({ answer1: docs });
   } catch (err) {
     console.log(err);
     return res.status({ error: 'Error retreiving answers!' });
@@ -55,7 +55,7 @@ const results = (req, res) => res.json({ redirect: '/results' });
 module.exports = {
   quizPage,
   updateQuiz,
-  getAnswers,
+  getAnswer1,
   q1,
   q2,
   q3,

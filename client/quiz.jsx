@@ -20,37 +20,29 @@ const PlaceholderAd = () => {
     }
 };
 
-const Answer = (props) => {
-    const [answer, setAnswer] = useState(props.answer);
+const Answer1 = (props) => {
+    const [answer1, setAnswer] = useState(props.answer1);
 
     useEffect(() => {
-        const loadAnswerFromServer = async () => {
-            const response = await fetch('/getAnswers');
+        const loadAnswer1FromServer = async () => {
+            const response = await fetch('/getAnswer1');
             const data = await response.json();
-            setAnswer(data.answer);
+            setAnswer(data.answer1);
         };
-        loadAnswerFromServer();
-    }, [props.reloadAnswers]);
-    console.log(answer);
+        loadAnswer1FromServer();
+    }, [props.reloadAnswers1]);
+    console.log(answer1);
 
-    if(answer.length === 0) {
-        return (
-            <div>
-                <h3>Answer 1:</h3>
-                <h3>Answer 2:</h3>
-                <h3>Answer 3:</h3>
-                <h3>Answer 4:</h3>
-                <h3>Answer 5:</h3>
-            </div>
-        );
+    if(answer1.length === 0) {
+        return;
     }
 }
 
-const AnswerRecords = () => {
-    const [reloadAnswers, setReloadAnswers] = useState(false);
+const AnswerRecords1 = () => {
+    const [reloadAnswers1, setReloadAnswers1] = useState(false);
 
     return (
-        <Answer answer={[]} reloadAnswers={reloadAnswers}/>
+        <Answer1 answer1={[]} reloadAnswers1={reloadAnswers1}/>
     );
 };
 
@@ -79,7 +71,7 @@ const handleAnswer = (e, question) => {
         }
     }
 
-    helper.sendPost(e.target.action, {question, answer, intSelected})
+    helper.sendPost(e.target.action, {question, answer, intSelected});
     
     return false;
 };
@@ -252,7 +244,11 @@ const init = () => {
 
     const root = createRoot(document.getElementById('app'));
     const rootAd = createRoot(document.getElementById('ad'));
-    const rootRecord = createRoot(document.getElementById('check'));
+    const rootRecord1 = createRoot(document.getElementById('check1'));
+    const rootRecord2 = createRoot(document.getElementById('check2'));
+    const rootRecord3 = createRoot(document.getElementById('check3'));
+    const rootRecord4 = createRoot(document.getElementById('check4'));
+    const rootRecord5 = createRoot(document.getElementById('check5'));
 
     homeButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -299,7 +295,11 @@ const init = () => {
 
     root.render( <App /> );
     rootAd.render( <PlaceholderAd /> );
-    rootRecord.render( <AnswerRecords /> );
+    rootRecord1.render( <AnswerRecords1 /> );
+    rootRecord2.render( <AnswerRecords2 /> );
+    rootRecord3.render( <AnswerRecords3 /> );
+    rootRecord4.render( <AnswerRecords4 /> );
+    rootRecord5.render( <AnswerRecords5 /> );
 }
 
 window.onload = init;
