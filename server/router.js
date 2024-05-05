@@ -9,10 +9,11 @@ const router = (app) => {
   app.post('/change', mid.requiresSecure, mid.requiresLogout, controllers.Account.change);
   app.post('/admin', mid.requiresSecure, mid.requiresLogout, controllers.Account.admin);
 
-  app.get('/logout', controllers.Account.logout);
+  app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
   app.get('/adminPage', controllers.Admin.adminPage);
   app.get('/users', controllers.Admin.users);
+  app.get('/logoutAdmin', controllers.Account.logout);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.get('/*', controllers.NotFound.notFound);
