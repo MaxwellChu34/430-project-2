@@ -20,6 +20,40 @@ const PlaceholderAd = () => {
     }
 };
 
+const Answer = (props) => {
+    const [answer, setAnswer] = useState(props.answer);
+
+    useEffect(() => {
+        const loadAnswerFromServer = async () => {
+            const response = await fetch('/getAnswers');
+            const data = await response.json();
+            setAnswer(data.answer);
+        };
+        loadAnswerFromServer();
+    }, [props.reloadAnswers]);
+    console.log(answer);
+
+    if(answer.length === 0) {
+        return (
+            <div>
+                <h3>Answer 1:</h3>
+                <h3>Answer 2:</h3>
+                <h3>Answer 3:</h3>
+                <h3>Answer 4:</h3>
+                <h3>Answer 5:</h3>
+            </div>
+        );
+    }
+}
+
+const AnswerRecords = () => {
+    const [reloadAnswers, setReloadAnswers] = useState(false);
+
+    return (
+        <Answer answer={[]} reloadAnswers={reloadAnswers}/>
+    );
+};
+
 const handleAnswer = (e, question) => {
     e.preventDefault();
 
@@ -218,6 +252,7 @@ const init = () => {
 
     const root = createRoot(document.getElementById('app'));
     const rootAd = createRoot(document.getElementById('ad'));
+    const rootRecord = createRoot(document.getElementById('check'));
 
     homeButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -264,6 +299,7 @@ const init = () => {
 
     root.render( <App /> );
     rootAd.render( <PlaceholderAd /> );
+    rootRecord.render( <AnswerRecords /> );
 }
 
 window.onload = init;

@@ -7,14 +7,36 @@ const quizPage = async (req, res) => {
 };
 
 const updateQuiz = async (req, res) => {
+  if (!req.body.answerName || !req.body.intSelected) {
+    return res.status(400).json({ error: 'The question was not answered!' });
+  }
+
+  const question = `${req.body.question}`;
+  const answerName = `${req.body.answer}`;
+  const answerValue = `${req.body.intSelected}`;
+
   try {
     const query = { owner: req.session.account._id };
-    const docs = await Quiz.find(query).select('q1 q2 q3 q4 q5').lean().exec();
-
-    return res.json({ domos: docs });
+    const doc = await Quiz.findOne(query).lean().exec();
+    if (doc) {
+      const updatePromise = Quiz.findOneAndUpdate();
+    }
+    return res.status(404).json({ error: 'No quiz data found for user' });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: 'Error retrieving answers!' });
+    return res.status(500).json({ error: 'Something went wrong with contacting the database!' });
+  }
+};
+
+const getAnswers = async (req, res) => {
+  try {
+    const query = { owner: req.session.account._id };
+    const docs = await Quiz.find(query).select('qAnswer1 qAnswer2 qAnswer3 qAnswer4 qAnswer5').lean().exec();
+
+    return res.json({ answer: docs });
+  } catch (err) {
+    console.log(err);
+    return res.status({ error: 'Error retreiving answers!' });
   }
 };
 
@@ -33,6 +55,7 @@ const results = (req, res) => res.json({ redirect: '/results' });
 module.exports = {
   quizPage,
   updateQuiz,
+  getAnswers,
   q1,
   q2,
   q3,
