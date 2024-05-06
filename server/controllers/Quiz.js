@@ -25,46 +25,34 @@ const updateQuiz = async (req, res) => {
   if (!req.body.answer || !req.body.answerIdNum) {
     return res.status(400).json({ error: 'The question was not answered!' });
   }
-
-  try {
-    const query = { owner: req.session.account._id };
-    const docs = await Quiz.findOne(query).lean().exec();
-
-    if (!docs) {
-      return res.status(404).json({ error: 'An error occured finding quiz data!' });
-    }
-
-    let updatePromise;
-    switch (req.body.question) {
-      case 1:
-        updatePromise = Quiz.findOneAndUpdate({}, {
-          qAnswer1: req.body.answer,
-          qDeterminant1: req.body.answerIdNum,
-        }).lean().exec();
-        updatePromise.then((doc) => res.json({
-          qAnswer1: doc.qAnswer1,
-          qDeterminant1: doc.qDeterminant1,
-        }));
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      case 5:
-        break;
-      default:
-        break;
-    }
-    updatePromise.catch((err) => {
-      console.log(err);
-      return res.status(500).json({ error: 'Something went wrong' });
-    });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ error: 'Something went wrong with contacting the database!' });
+  const query = {owner: req.session.account._id};
+  let updatePromise;
+  switch (req.body.question) {
+    case 1:
+      updatePromise = Quiz.findOneAndUpdate(query, {
+        qAnswer1: req.body.answer,
+        qDeterminant1: req.body.answerIdNum,
+      }).lean().exec();
+      updatePromise.then((doc) => res.json({
+        qAnswer1: doc.qAnswer1,
+        qDeterminant1: doc.qDeterminant1,
+      }));
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+    case 5:
+      break;
+    default:
+      break;
   }
+  updatePromise.catch((err) => {
+    console.log(err);
+    return res.status(500).json({ error: 'Something went wrong' });
+  });
 };
 
 // Gets Answer term for question 1

@@ -297,42 +297,36 @@ const init = () => {
     q1.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q1 /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     q2.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q2 /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     q3.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q3 /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     q4.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q4 /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     q5.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q5 /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     results.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Results /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     })
 

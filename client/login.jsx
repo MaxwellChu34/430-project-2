@@ -182,28 +182,24 @@ const init = () => {
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <LoginWindow /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     signupButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <SignupWindow/> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     changeButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <ChangeWindow /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     });
 
     adminButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <AdminWindow /> );
-        rootAd.render( <PlaceholderAd/> );
         return false;
     })
 
