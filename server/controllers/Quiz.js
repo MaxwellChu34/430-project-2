@@ -25,6 +25,7 @@ const updateQuiz = async (req, res) => {
 
   try {
     const query = { owner: req.session.account._id };
+    console.log(req);
     const doc = await Quiz.findOne(query).lean().exec();
     if (!doc) {
       const quizData = {
@@ -43,7 +44,18 @@ const updateQuiz = async (req, res) => {
       try {
         const newQuiz = new Quiz(quizData);
         await newQuiz.save();
-        
+        return res.status(201).json({ 
+          qAnswer1: newQuiz.qAnswer1,
+          qAnswer2: newQuiz.qAnswer2,
+          qAnswer3: newQuiz.qAnswer3,
+          qAnswer4: newQuiz.qAnswer4,
+          qAnswer5: newQuiz.qAnswer5,
+          qDeterminant1: newQuiz.qAnswer1,
+          qDeterminant1: newQuiz.qAnswer2,
+          qDeterminant1: newQuiz.qAnswer3,
+          qDeterminant1: newQuiz.qAnswer4,
+          qDeterminant1: newQuiz.qAnswer5
+        });
       } catch (err) {
         console.log(err);
         return res.status(500).json({ error: 'An error occured making quiz data!' });
