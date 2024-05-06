@@ -1,4 +1,4 @@
-//All of this is from DomoMaker
+// All of this is from DomoMaker
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');

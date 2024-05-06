@@ -1,8 +1,9 @@
-//A majority of this is from DomoMaker
+// A majority of this is from DomoMaker
 
 const models = require('../models');
 
 const { Account } = models;
+const { Quiz } = models;
 
 const loginPage = (req, res) => res.render('login');
 
@@ -48,6 +49,26 @@ const signup = async (req, res) => {
     const newAccount = new Account({ username, password: hash });
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
+    const quizData = {
+      qAnswer1: 'UNANSWERED!',
+      qAnswer2: 'UNANSWERED!',
+      qAnswer3: 'UNANSWERED!',
+      qAnswer4: 'UNANSWERED!',
+      qAnswer5: 'UNANSWERED!',
+      qDeterminant1: 0,
+      qDeterminant2: 0,
+      qDeterminant3: 0,
+      qDeterminant4: 0,
+      qDeterminant5: 0,
+      owner: req.session.account._id,
+    };
+    try {
+      const newQuiz = new Quiz(quizData);
+      await newQuiz.save();
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: 'An error occured making quiz data!' });
+    }
     return res.json({ redirect: '/quiz' });
   } catch (err) {
     console.log(err);
@@ -58,7 +79,7 @@ const signup = async (req, res) => {
   }
 };
 
-//change is responsible for authenticating the user and then changing the password
+// change is responsible for authenticating the user and then changing the password
 const change = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -92,7 +113,7 @@ const change = async (req, res) => {
   });
 };
 
-//admin checks if username is ADMIN and if password is PASSWORD
+// admin checks if username is ADMIN and if password is PASSWORD
 const admin = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
