@@ -17,8 +17,8 @@ const GetUsers = (props) => {
 
     if(users.length === 0) {
         return (
-            <div className="userList">
-                <h3 className="emptyDomo">No Logins Yet!</h3>
+            <div className="">
+                <h3>No Logins Yet!</h3>
             </div>
         );
     }
