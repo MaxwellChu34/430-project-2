@@ -22,37 +22,44 @@ const PlaceholderAd = () => {
 };
 
 //Answer1 gets the answer name object from the first question
-const Answer1 = (props) => {
-    const [answer1, setAnswer] = useState(props.answer1);
+const Answers = (props) => {
+    const [answers, setAnswers] = useState(props.answers);
 
     useEffect(() => {
-        const loadAnswer1FromServer = async () => {
-            const response = await fetch('/getAnswer1');
+        const loadAnswersFromServer = async () => {
+            const response = await fetch('/getAnswer');
+            console.log(response);
             const data = await response.json();
-            setAnswer(data.qAnswer1);
+            setAnswers(data.answers);
         };
-        loadAnswer1FromServer();
-    }, [props.reloadAnswers1]);
+        loadAnswersFromServer();
+    }, [props.reloadAnswers]);
 
-    if(answer1.length === 0) {
+    if(answers.length === 0) {
         return;
     }
 
-    const answerNode = answer1.map(answer => {
+    const answerNodes = answers.map(answer => {
         return (
-            <h4>{answer.qAnswer1}</h4>
+            <div>
+                <h5>Answer 1: {answer.qAnswer1}</h5>
+                <h5>Answer 2: {answer.qAnswer2}</h5>
+                <h5>Answer 3: {answer.qAnswer3}</h5>
+                <h5>Answer 4: {answer.qAnswer4}</h5>
+                <h5>Answer 5: {answer.qAnswer5}</h5>
+            </div>
         );
     });
 
-    return (<div>{answerNode}</div>);
+    return (answerNodes);
 };
 
 //AnswerRecords 1 returns Answer1 value if there is any
-const AnswerRecords1 = () => {
-    const [reloadAnswers1, setReloadAnswers1] = useState(false);
+const AnswerRecords = () => {
+    const [reloadAnswers, setReloadAnswers] = useState(false);
 
     return (
-        <Answer1 answer1={[]} reloadAnswers1={reloadAnswers1}/>
+        <Answers answers={[]} reloadAnswers={reloadAnswers}/>
     );
 };
 
@@ -278,11 +285,7 @@ const init = () => {
 
     const root = createRoot(document.getElementById('app'));
     const rootAd = createRoot(document.getElementById('ad'));
-    const rootRecord1 = createRoot(document.getElementById('check1'));
-    /*const rootRecord2 = createRoot(document.getElementById('check2'));
-    const rootRecord3 = createRoot(document.getElementById('check3'));
-    const rootRecord4 = createRoot(document.getElementById('check4'));
-    const rootRecord5 = createRoot(document.getElementById('check5'));*/
+    const rootRecord = createRoot(document.getElementById('record'));
 
     homeButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -295,46 +298,47 @@ const init = () => {
         e.preventDefault();
         root.render( <Q1 /> );
         rootAd.render( <PlaceholderAd/> );
+        return false;
     });
 
     q2.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q2 /> );
         rootAd.render( <PlaceholderAd/> );
+        return false;
     });
 
     q3.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q3 /> );
         rootAd.render( <PlaceholderAd/> );
+        return false;
     });
 
     q4.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q4 /> );
         rootAd.render( <PlaceholderAd/> );
+        return false;
     });
 
     q5.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Q5 /> );
         rootAd.render( <PlaceholderAd/> );
+        return false;
     });
 
     results.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <Results /> );
         rootAd.render( <PlaceholderAd/> );
+        return false;
     })
 
     root.render( <App /> );
     rootAd.render( <PlaceholderAd /> );
-    rootRecord1.render( <AnswerRecords1 /> );
-    /*
-    rootRecord2.render( <AnswerRecords2 /> );
-    rootRecord3.render( <AnswerRecords3 /> );
-    rootRecord4.render( <AnswerRecords4 /> );
-    rootRecord5.render( <AnswerRecords5 /> );*/
+    rootRecord.render( <AnswerRecords /> );
 }
 
 window.onload = init;

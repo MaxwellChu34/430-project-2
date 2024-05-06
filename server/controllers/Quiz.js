@@ -68,14 +68,14 @@ const updateQuiz = async (req, res) => {
 };
 
 // Gets Answer term for question 1
-const getAnswer1 = async (req, res) => {
+const getAnswer = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
-    const docs = await Quiz.find(query).select('qAnswer1').lean().exec();
-    return res.json({ qAnswer1: docs });
+    const docs = await Quiz.find(query).select('qAnswer1 qAnswer2 qAnswer3 qAnswer4 qAnswer5').lean().exec();
+    return res.json({ answers: docs });
   } catch (err) {
     console.log(err);
-    return res.status({ error: 'Error retrieving answer 1!' });
+    return res.status({ error: 'Error retrieving answers!' });
   }
 };
 
@@ -88,5 +88,5 @@ module.exports = {
   q5,
   results,
   updateQuiz,
-  getAnswer1,
+  getAnswer,
 };
