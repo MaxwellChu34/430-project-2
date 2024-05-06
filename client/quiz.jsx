@@ -28,7 +28,6 @@ const Answers = (props) => {
     useEffect(() => {
         const loadAnswersFromServer = async () => {
             const response = await fetch('/getAnswer');
-            console.log(response);
             const data = await response.json();
             setAnswers(data.answers);
         };
@@ -111,7 +110,7 @@ const App = () => {
 const Q1 = (props) => {
     return (
         <form id="question1" name="q1" 
-        onSubmit={(e) => handleAnswer(e, 1, props.triggerReload)} 
+        onSubmit={(e) => handleAnswer(e, 1, window.location.reload())} 
         action="/q1" method="POST" className="quizForm">
             <h3>Question 1: What is your favorite color?</h3>
             <div id="radioGroup">
@@ -143,7 +142,7 @@ const Q1 = (props) => {
 const Q2 = () => {
     return (
         <form id="question2" name="q2" 
-        onSubmit={(e) => handleAnswer(e, 2)} 
+        onSubmit={(e) => handleAnswer(e, 2, window.location.reload())} 
         action="/q2" method="POST" className="quizForm">
             <h3>Question 2: Which animal do you like the most out of this selection?</h3>
             <div id="radioGroup">
@@ -175,7 +174,7 @@ const Q2 = () => {
 const Q3 = () => {
     return (
         <form id="question3" name="q3" 
-        onSubmit={(e) => handleAnswer(e, 3)} 
+        onSubmit={(e) => handleAnswer(e, 3, window.location.reload())} 
         action="/q3" method="POST" className="quizForm">
             <h3>Question 3: Which number do you like the most out of these?</h3>
             <div id="radioGroup">
@@ -207,7 +206,7 @@ const Q3 = () => {
 const Q4 = () => {
     return (
         <form id="question4" name="q4" 
-        onSubmit={(e) => handleAnswer(e, 4)} 
+        onSubmit={(e) => handleAnswer(e, 4, window.location.reload())} 
         action="/q4" method="POST" className="quizForm">
             <h3>Question 4: Want a superpower?</h3>
             <div id="radioGroup">
@@ -239,7 +238,7 @@ const Q4 = () => {
 const Q5 = () => {
     return (
         <form id="question5" name="q5" 
-        onSubmit={(e) => handleAnswer(e, 5)} 
+        onSubmit={(e) => handleAnswer(e, 5, window.location.reload())} 
         action="/q5" method="POST" className="quizForm">
             <h3>Question 5: Who do you think you will get?</h3>
             <div id="radioGroup">
@@ -267,10 +266,30 @@ const Q5 = () => {
     )
 };
 
+const handleValidity = () => {
+    const [answers, setAnswers] = useState(props.answers);
+
+    useEffect(() => {
+        const loadAnswersFromServer = async () => {
+            const response = await fetch('/getDetermine');
+            console.log(response);
+            const data = await response.json();
+            setAnswers(data.answers);
+        };
+        loadAnswersFromServer();
+    }, [props.reloadAnswers]);
+
+    console.log(answers);
+}
+
 //Results sends to results page
 const Results = () => {
     return (
-        <button type="button">SUBMIT QUIZ!</button>
+        <form id="submitResults" name="results"
+        onSubmit={handleValidity} action="/validity"
+        method="POST" className="formSubmit">
+            <input className="formSubmit" type="submit" id="result" value="SUBMIT QUIZ" />
+        </form>
     )
 };
 

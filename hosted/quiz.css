@@ -63,7 +63,7 @@ h3, h5, #radioGroup {
     width: 80%;
 }
 
-input[type=submit], button {
+input[type=submit] {
     width: 100px;
     margin: 0 auto;
     margin-top: 20px;
@@ -72,12 +72,6 @@ input[type=submit], button {
     border-radius: 5px;
     border: 2px solid black;
     background-color: chartreuse;
-}
-
-button {
-    width: 250px;
-    font-size: 50px;
-    font-weight: bold;
 }
 
 #radioGroup {
@@ -89,3 +83,8 @@ button {
     font-size: larger;
 }
 
+#result {
+    width: 400px;
+    font-size: 50px;
+    font-weight: bold;
+}

@@ -16,7 +16,7 @@ const router = (app) => {
   app.get('/q3', mid.requiresLogin, controllers.Quiz.q3);
   app.get('/q4', mid.requiresLogin, controllers.Quiz.q4);
   app.get('/q5', mid.requiresLogin, controllers.Quiz.q5);
-  app.get('/results', mid.requiresLogin, controllers.Quiz.results);
+  // app.get('/results', mid.requiresLogin, controllers.Quiz.resultsPage);
 
   app.post('/q1', mid.requiresLogin, controllers.Quiz.updateQuiz);
   app.post('/q2', mid.requiresLogin, controllers.Quiz.updateQuiz);
@@ -25,6 +25,8 @@ const router = (app) => {
   app.post('/q5', mid.requiresLogin, controllers.Quiz.updateQuiz);
 
   app.get('/getAnswer', mid.requiresLogin, controllers.Quiz.getAnswer);
+  // app.get('/getDetermine', mid.requiresLogin, controllers.Quiz.getDetermine);
+  // app.post('/validity', mid.requiresLogin, controllers.Quiz.validity);
 
   app.get('/adminPage', controllers.Admin.adminPage);
   app.get('/users', controllers.Admin.users);
