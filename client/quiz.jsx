@@ -3,6 +3,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
+//PlaceholderAd is a proof of concept profit model that displays a clickable image to a different site
 const PlaceholderAd = () => {
     let ad = Math.floor(Math.random() * 3);
     if(ad === 0) {
@@ -20,6 +21,7 @@ const PlaceholderAd = () => {
     }
 };
 
+//Answer1 gets the answer name object from the first question
 const Answer1 = (props) => {
     const [answer1, setAnswer] = useState(props.answer1);
 
@@ -46,6 +48,7 @@ const Answer1 = (props) => {
     return ({answerNode});
 };
 
+//AnswerRecords 1 returns Answer1 value if there is any
 const AnswerRecords1 = () => {
     const [reloadAnswers1, setReloadAnswers1] = useState(false);
 
@@ -54,6 +57,7 @@ const AnswerRecords1 = () => {
     );
 };
 
+//
 const handleAnswer = (e, question, onAnswerUpdate) => {
     e.preventDefault();
 
@@ -80,6 +84,7 @@ const handleAnswer = (e, question, onAnswerUpdate) => {
     return false;
 };
 
+//Homepage Application instruction 
 const App = () => {
     return (
         <div>
@@ -96,6 +101,7 @@ const App = () => {
     )
 };
 
+//Q1 is a form for question 1
 const Q1 = (props) => {
     return (
         <form id="question1" name="q1" 
@@ -127,6 +133,7 @@ const Q1 = (props) => {
     )
 };
 
+//Q2 is a form for question 2
 const Q2 = () => {
     return (
         <form id="question2" name="q2" 
@@ -158,6 +165,7 @@ const Q2 = () => {
     )
 };
 
+//Q3 is a form for question 3
 const Q3 = () => {
     return (
         <form id="question3" name="q3" 
@@ -189,6 +197,7 @@ const Q3 = () => {
     )
 };
 
+//Q4 is a form for question 4
 const Q4 = () => {
     return (
         <form id="question4" name="q4" 
@@ -220,6 +229,7 @@ const Q4 = () => {
     )
 };
 
+//Q5 is a form for question 5
 const Q5 = () => {
     return (
         <form id="question5" name="q5" 
@@ -251,6 +261,7 @@ const Q5 = () => {
     )
 };
 
+//Results sends to results page
 const Results = () => {
     return (
         <button type="button">SUBMIT QUIZ!</button>

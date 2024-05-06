@@ -1,3 +1,5 @@
+//This is from my portion of DomoMaker E
+
 const models = require('../models');
 
 const { Account } = models;

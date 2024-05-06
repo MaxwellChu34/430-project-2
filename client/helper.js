@@ -1,3 +1,5 @@
+//Everything here is from DomoMaker
+
 const handleError = (message) => {
     document.getElementById('errorMessage').textContent = message;
 };

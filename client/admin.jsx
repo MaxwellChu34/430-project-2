@@ -3,6 +3,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const {createRoot} = require('react-dom/client');
 
+//GetUsers was from my own creative portion of DomoMaker E. It follows a model similar to how DomoMakers were gotten
 const GetUsers = (props) => {
     const [users, setUsers] = useState(props.users);
     console.log(users);
@@ -38,6 +39,7 @@ const GetUsers = (props) => {
     );
 };
 
+//AdminWindow after logging in calls the above function
 const AdminWindow = () => {
     const [reloadUsers, setReloadUsers] = useState(false);
 

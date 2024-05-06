@@ -1,3 +1,5 @@
+//This is the quiz model, it consists of the answer terms and respective values that I gave it
+
 const mongoose = require('mongoose');
 
 let QuizModel = {};

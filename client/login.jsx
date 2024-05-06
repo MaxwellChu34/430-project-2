@@ -3,6 +3,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const {createRoot} = require('react-dom/client');
 
+//PlaceholderAd is a proof of concept profit model that displays a clickable image to a different site
 const PlaceholderAd = () => {
     let ad = Math.floor(Math.random() * 3);
     if(ad === 0) {
@@ -20,6 +21,7 @@ const PlaceholderAd = () => {
     }
 };
 
+//Handle Login is from DomoMaker
 const handleLogin = (e) => {
     e.preventDefault();
 
@@ -35,6 +37,7 @@ const handleLogin = (e) => {
     return false; 
 };
 
+//Handle Signup is from DomoMaker
 const handleSignup = (e, onUserAdded) => {
     e.preventDefault();
     
@@ -60,7 +63,7 @@ const handleSignup = (e, onUserAdded) => {
     return false;
 };
 
-
+//Handle Change is responsible for changing the password and is called from the change password screen
 const handleChange = (e, onPassUpdate) => {
     e.preventDefault();
 
@@ -90,6 +93,7 @@ const handleChange = (e, onPassUpdate) => {
     return false;
 };
 
+//handleAdmin is in charge of determining whether the admin username/password is correct
 const handleAdmin = (e) => {
     e.preventDefault();
 
@@ -110,6 +114,7 @@ const handleAdmin = (e) => {
     return false;
 };
 
+//LoginWindow is from DomoMaker
 const LoginWindow = () => {
     return (
         <form id="loginForm" name="loginForm" onSubmit={handleLogin} action="/login" method="POST" className="mainForm">
@@ -122,6 +127,7 @@ const LoginWindow = () => {
     );
 };
 
+//SignupWindow is from DomoMaker
 const SignupWindow = (props) => {
     return (
         <form id="signupForm" name="signupForm" onSubmit={(e) => handleSignup(e, props.triggerReload)} action="/signup" method="POST" className="mainForm">
@@ -136,6 +142,7 @@ const SignupWindow = (props) => {
     );
 };
 
+//ChangeWindow is responsible for trying to change the password
 const ChangeWindow = (props) => {
     return (
         <form id="changeForm" name="changeForm" onSubmit={(e) => handleChange(e, props.triggerReload)} action="/change" method="POST" className="mainForm">
@@ -150,6 +157,7 @@ const ChangeWindow = (props) => {
     )
 }
 
+//AdminWindow is responsible for logging in as admin
 const AdminWindow = () => {
     return (
         <form id="adminForm" name="adminForm" onSubmit={handleAdmin} action="/admin" method="POST" className="mainForm">

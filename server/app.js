@@ -1,3 +1,5 @@
+//This is based on DomoMaker, the dbURI is changed to 'FinalProject'
+
 require('dotenv').config();
 
 const path = require('path');

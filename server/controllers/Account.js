@@ -1,3 +1,5 @@
+//A majority of this is from DomoMaker
+
 const models = require('../models');
 
 const { Account } = models;
@@ -56,6 +58,7 @@ const signup = async (req, res) => {
   }
 };
 
+//change is responsible for authenticating the user and then changing the password
 const change = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -89,6 +92,7 @@ const change = async (req, res) => {
   });
 };
 
+//admin checks if username is ADMIN and if password is PASSWORD
 const admin = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
