@@ -85,7 +85,11 @@ button {
     display: block;
     text-align: center;
     margin-right: 10%;
-    font-family: cursive;
+    font-family: 'Courier New', Courier, monospace;
     font-size: larger;
 }
 
+h4 {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}

@@ -27,10 +27,9 @@ const Answer1 = (props) => {
 
     useEffect(() => {
         const loadAnswer1FromServer = async () => {
-            const response = await fetch('/getAnswers1');
-            console.log(response);
+            const response = await fetch('/getAnswer1');
             const data = await response.json();
-            setAnswer(data.answer1);
+            setAnswer(data.qAnswer1);
         };
         loadAnswer1FromServer();
     }, [props.reloadAnswers1]);
@@ -41,11 +40,11 @@ const Answer1 = (props) => {
 
     const answerNode = answer1.map(answer => {
         return (
-            <h3>{answer.qanswer1}</h3>
+            <h4>{answer.qAnswer1}</h4>
         );
     });
 
-    return ({answerNode});
+    return (<div>{answerNode}</div>);
 };
 
 //AnswerRecords 1 returns Answer1 value if there is any

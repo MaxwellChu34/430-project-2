@@ -24,7 +24,7 @@ const router = (app) => {
   app.post('/q4', mid.requiresLogin, controllers.Quiz.updateQuiz);
   app.post('/q5', mid.requiresLogin, controllers.Quiz.updateQuiz);
 
-  app.get('/getAnswers1', mid.requiresLogin, controllers.Quiz.getAnswer1);
+  app.get('/getAnswer1', mid.requiresLogin, controllers.Quiz.getAnswer1);
 
   app.get('/adminPage', controllers.Admin.adminPage);
   app.get('/users', controllers.Admin.users);

@@ -72,11 +72,10 @@ const getAnswer1 = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
     const docs = await Quiz.find(query).select('qAnswer1').lean().exec();
-
     return res.json({ qAnswer1: docs });
   } catch (err) {
     console.log(err);
-    return res.status({ error: 'Error retrieving answers!' });
+    return res.status({ error: 'Error retrieving answer 1!' });
   }
 };
 
