@@ -99,8 +99,28 @@ const getAnswer = async (req, res) => {
 };
 
 const results = async (req, res) => {
-  return res.json({ redirect: '/result'});
-}
+  try {
+    const query = { owner: req.session.account._id };
+    const docs = await Quiz.find(query).select(
+      'qDeterminant1 qDeterminant2 qDeterminant3 qDeterminant4 qDeterminant5',
+    ).lean().exec();
+    if (docs[0].qDeterminant1 === 0) {
+      return res.status(400).json({ error: 'Please answer Question 1 before submitting' });
+    } if (docs[0].qDeterminant2 === 0) {
+      return res.status(400).json({ error: 'Please answer Question 2 before submitting' });
+    } if (docs[0].qDeterminant3 === 0) {
+      return res.status(400).json({ error: 'Please answer Question 3 before submitting' });
+    } if (docs[0].qDeterminant4 === 0) {
+      return res.status(400).json({ error: 'Please answer Question 4 before submitting' });
+    } if (docs[0].qDeterminant5 === 0) {
+      return res.status(400).json({ error: 'Please answer Question 5 before submitting' });
+    }
+    return res.json({ redirect: '/result' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error retrieving determinants!' });
+  }
+};
 
 module.exports = {
   quizPage,
