@@ -5,6 +5,7 @@ module.exports = {
         login: './client/login.jsx',
         admin: './client/admin.jsx',
         quiz: './client/quiz.jsx',
+        result: './client/result.jsx',
     },
     module: {
         rules: [

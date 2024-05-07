@@ -98,35 +98,9 @@ const getAnswer = async (req, res) => {
   }
 };
 
-/*
-const getDetermine = async (req, res) => {
-};
-
-const validity = async (req, res) => {
-  try {
-    const query = { owner: req.session.account._id };
-    const docs = await Quiz.find(query).select(
-      'qDeterminant1 qDeterminant2 qDeterminant3 qDeterminant4 qDeterminant5')
-      .lean().exec();
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ error: 'Error retrieving answer determines!' });
-  }
-
-  if(req.body.one === 0) {
-    return res.status(400).json({ error: 'Please enter the first question! '});
-  } else if (req.body.two === 0) {
-    return res.status(400).json({ error: 'Please enter the second question! '});
-  } else if (req.body.three === 0) {
-    return res.status(400).json({ error: 'Please enter the third question! '});
-  } else if (req.body.four === 0) {
-    return res.status(400).json({ error: 'Please enter the fourth question! '});
-  } else if (req.body.five === 0) {
-    return res.status(400).json({ error: 'Please enter the fifth question! '});
-  } else {
-    return res.json({ redirect: '/results' });
-  }
-} */
+const results = async (req, res) => {
+  return res.json({ redirect: '/result'});
+}
 
 module.exports = {
   quizPage,
@@ -137,4 +111,5 @@ module.exports = {
   q5,
   updateQuiz,
   getAnswer,
+  results,
 };

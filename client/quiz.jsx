@@ -107,7 +107,7 @@ const App = () => {
 };
 
 //Q1 is a form for question 1
-const Q1 = (props) => {
+const Q1 = () => {
     return (
         <form id="question1" name="q1" 
         onSubmit={(e) => handleAnswer(e, 1, window.location.reload())} 
@@ -266,28 +266,18 @@ const Q5 = () => {
     )
 };
 
-const handleValidity = () => {
-    const [answers, setAnswers] = useState(props.answers);
-
-    useEffect(() => {
-        const loadAnswersFromServer = async () => {
-            const response = await fetch('/getDetermine');
-            console.log(response);
-            const data = await response.json();
-            setAnswers(data.answers);
-        };
-        loadAnswersFromServer();
-    }, [props.reloadAnswers]);
-
-    console.log(answers);
+const handleValidity = (e) => {
+    e.preventDefault();
+    helper.sendPost(e.target.action, {});
+    return false;
 }
 
 //Results sends to results page
 const Results = () => {
     return (
         <form id="submitResults" name="results"
-        onSubmit={handleValidity} action="/validity"
-        method="POST" className="formSubmit">
+        onSubmit={handleValidity}
+        action="/result" method="POST" className="formSubmit">
             <input className="formSubmit" type="submit" id="result" value="SUBMIT QUIZ" />
         </form>
     )
