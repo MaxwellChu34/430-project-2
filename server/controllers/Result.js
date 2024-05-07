@@ -2,8 +2,14 @@ const models = require('../models');
 
 const { Quiz } = models;
 
+//Renders Results Page
 const resultsPage = (req, res) => res.render('results');
 
+//getResults determines if all questions have been answered, if not then redirect back to quiz
+//A mode calculator is set in place to determine which ID num comes up the most
+//https://www.geeksforgeeks.org/find-mode-of-an-array-using-javascript/
+//This is my source for calculating mode
+//If there is more than one, a random one is picked
 const getResults = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };

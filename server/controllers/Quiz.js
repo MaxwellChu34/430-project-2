@@ -26,7 +26,7 @@ const updateQuiz = async (req, res) => {
 
   const query = { owner: req.session.account._id };
   let updatePromise;
-  //A switch case is put in place that depends on which question the user submits in
+  // A switch case is put in place that depends on which question the user submits in
   switch (req.body.question) {
     case 1:
       updatePromise = Quiz.findOneAndUpdate(query, {
