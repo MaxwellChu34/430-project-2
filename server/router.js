@@ -31,6 +31,7 @@ const router = (app) => {
 
   app.get('/result', mid.requiresLogin, controllers.Result.resultsPage);
   app.post('/result', mid.requiresLogin, controllers.Quiz.results);
+  app.get('/getResults', mid.requiresLogin, controllers.Result.getResults);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.get('/*', controllers.NotFound.notFound);

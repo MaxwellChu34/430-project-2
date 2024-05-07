@@ -20,8 +20,86 @@ const PlaceholderAd = () => {
     }
 };
 
-const ResultWindow = () => {
+const CalcResult = (props) => {
+    const [result, setResult] = useState(props.result);
+    useEffect(() => {
+        const loadResultFromServer = async () => {
+            const response = await fetch('/getResults');
+            const data = await response.json();
+            setResult(data);
+        };
+        loadResultFromServer();
+    }, [props.reloadResult]);
 
+    let mode = result.result;
+    if(Array.isArray(mode)){
+        //mode[0]
+        if(mode[0] === 1) {
+            return (
+                <div>
+                    <h3>NAYEON</h3>
+                </div>
+            )
+        } else if(mode[0] === 2) {
+            return (
+                <div>
+                    <h3>JEONGYEON</h3>
+                </div>
+            )
+        } else if(mode[0] === 3) {
+            return (
+                <div>
+                    <h3>MOMO</h3>
+                </div>
+            )
+        } else if(mode[0] === 4) {
+            return (
+                <div>
+                    <h3>SANA</h3>
+                </div>
+            )
+        } else if(mode[0] === 5) {
+            return (
+                <div>
+                    <h3>JIHYO</h3>
+                </div>
+            )
+        } else if(mode[0] === 6) {
+            return (
+                <div>
+                    <h3>MINA</h3>
+                </div>
+            )
+        } else if(mode[0] === 7) {
+            return (
+                <div>
+                    <h3>DAHYUN</h3>
+                </div>
+            )
+        } else if(mode[0] === 8) {
+            return (
+                <div>
+                    <h3>CHAEYOUNG</h3>
+                </div>
+            )
+        } else if(mode[0] === 9) {
+            return (
+                <div>
+                    <h3>TZUYU</h3>
+                </div>
+            )
+        }
+    }
+}
+
+const ResultWindow = () => {
+    const [reloadResult, setReloadResult] = useState(false);
+
+    return (
+        <div>
+            <CalcResult result={[]} reloadResult={reloadResult} />
+        </div>
+    )
 };
 
 const init = () => {
