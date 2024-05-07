@@ -3,6 +3,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const {createRoot} = require('react-dom/client');
 
+//PlaceholderAd is a proof of concept profit model that displays a clickable image to a different site
 const PlaceholderAd = () => {
     let ad = Math.floor(Math.random() * 3);
     if(ad === 0) {
@@ -20,6 +21,7 @@ const PlaceholderAd = () => {
     }
 };
 
+//CalcResult determines the mode on server side to see which member the user gets
 const CalcResult = (props) => {
     const [result, setResult] = useState(props.result);
     useEffect(() => {
@@ -92,6 +94,7 @@ const CalcResult = (props) => {
     }
 }
 
+//ResultWindow displays CalcResult
 const ResultWindow = () => {
     const [reloadResult, setReloadResult] = useState(false);
 

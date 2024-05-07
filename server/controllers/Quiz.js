@@ -1,12 +1,13 @@
 const models = require('../models');
 
 const { Quiz } = models;
+
 // Renders the homepage of application quiz
 const quizPage = async (req, res) => {
   res.render('quiz');
 };
 
-// Redirects each question and result page
+// Redirects each to their own question
 const q1 = (req, res) => res.json({ redirect: '/q1' });
 
 const q2 = (req, res) => res.json({ redirect: '/q2' });
@@ -17,8 +18,7 @@ const q4 = (req, res) => res.json({ redirect: '/q4' });
 
 const q5 = (req, res) => res.json({ redirect: '/q5' });
 
-// updateQuiz creates a new quiz if there isn't any and attempts to update it with any new
-// information currently does not work properly
+// updateQuiz updates the quiz received at signup
 const updateQuiz = async (req, res) => {
   if (!req.body.answer || !req.body.answerIdNum) {
     return res.status(400).json({ error: 'The question was not answered!' });
@@ -26,6 +26,7 @@ const updateQuiz = async (req, res) => {
 
   const query = { owner: req.session.account._id };
   let updatePromise;
+  //A switch case is put in place that depends on which question the user submits in
   switch (req.body.question) {
     case 1:
       updatePromise = Quiz.findOneAndUpdate(query, {
@@ -86,7 +87,7 @@ const updateQuiz = async (req, res) => {
   });
 };
 
-// Gets Answer term for question 1
+// Gets all Answer NAMES to display on the right side of screen
 const getAnswer = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
@@ -98,6 +99,7 @@ const getAnswer = async (req, res) => {
   }
 };
 
+// Gets all Answer ID's, checks if they have all been answered, then sends them to the result page
 const results = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };

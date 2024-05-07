@@ -49,6 +49,7 @@ const signup = async (req, res) => {
     const newAccount = new Account({ username, password: hash });
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
+    //A new quiz data is created on every sign in
     const quizData = {
       qAnswer1: 'UNANSWERED!',
       qAnswer2: 'UNANSWERED!',

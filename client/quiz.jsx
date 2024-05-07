@@ -21,7 +21,7 @@ const PlaceholderAd = () => {
     }
 };
 
-//Answer1 gets the answer name object from the first question
+//Answers gets the answer name object from all questions and displays them on the right side of the page
 const Answers = (props) => {
     const [answers, setAnswers] = useState(props.answers);
 
@@ -53,7 +53,7 @@ const Answers = (props) => {
     return (answerNodes);
 };
 
-//AnswerRecords 1 returns Answer1 value if there is any
+//AnswerRecords returns all answer value if there is any
 const AnswerRecords = () => {
     const [reloadAnswers, setReloadAnswers] = useState(false);
 
@@ -62,7 +62,7 @@ const AnswerRecords = () => {
     );
 };
 
-//
+//handleAnswer is called every time a user submits an individual question
 const handleAnswer = (e, question, onAnswerUpdate) => {
     e.preventDefault();
 
@@ -266,13 +266,14 @@ const Q5 = () => {
     )
 };
 
+//handleValidity sends a post to server side to determine if the user is able to go to see results
 const handleValidity = (e) => {
     e.preventDefault();
     helper.sendPost(e.target.action, {});
     return false;
 }
 
-//Results sends to results page
+//Results sends to results page on handleValidity condition
 const Results = () => {
     return (
         <form id="submitResults" name="results"
